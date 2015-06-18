@@ -46,3 +46,36 @@ var say = function(name) {
 
     console.log('Say hello'+ name);
 };
+//-------------------------Practica en clase  diapo 4
+//http://rubular.com/---> para verificar expresiones regulares
+///^[0-9]{4}$/.test(1234)
+//true
+//re = new RegExp(/^The value .+ is not a valid e-mail.$/)
+  //  /^The value .+ is not a valid e-mail.$/
+//re.test(123)
+
+var year = 2015;
+var isValidYear = function(yearToTest){
+    return /^[0-9]{4}$/.test(yearToTest);
+}
+var day = 30;
+var isValidDay = function(day){
+    return /^[0-3]{1}[0-9]{1}$/.test(day);
+}
+var month = 10;
+var month = function(month){
+    return /^[0-1]{1}[0-9]{1}$/.test(month);
+}
+    Console.log('The value ',year,'is',isvalidyear(year)?'valid':'invalid');
+
+
+//---ejercicio numero capicua
+var initRange = 20;
+var endRange = 50;
+/*var getFirstCapicua= function(offset,limit){
+        var cadena = 0;
+    for(var )
+}
+*/
+console.log('First capicua between',initRange, 'and', endRange, 'is',
+            getFirstCapicua(initRange,endRange));
