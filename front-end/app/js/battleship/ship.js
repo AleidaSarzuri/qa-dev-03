@@ -1,8 +1,8 @@
 /**
  * Created by aleidasarzuri on 6/22/2015.
  */
-var ship = function(size,initPos){
+var Ship = function(size,initPos){
     this.size = size;
-    this.position = pos;
+    this.position = initPos;
     this.status = 'ALIVE';
 };
