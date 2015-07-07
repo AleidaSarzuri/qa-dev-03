@@ -3,7 +3,7 @@
  */
 var Table = function(size){
   this.size = size;
-   this.ships = [];
+  this.ships = [];
   this.grid = [];
 
   this.initGrid();

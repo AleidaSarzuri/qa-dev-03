@@ -10,7 +10,7 @@
 })('Pepe');
 
 /**
-var sayhello =function(name){
+var sayhello = function(name){
 
     console.log('Name'+name);
 };
