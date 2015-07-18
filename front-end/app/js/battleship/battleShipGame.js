@@ -2,33 +2,55 @@
  * Created by aleidasarzuri on 6/25/2015.
  */
 
-var BattleShipGame = function(numPlayers, size)
-{
-    console.log('Starting the game for',numPlayers,'players');
-
+var BattleShipGame = function(player, size){
+    this.numPlayers = player;
+    this.tableSize = size;
     this.players = [];
     this.init();
-    this.start();
+    this.startGame();
+    console.log('Starting the game for ' +player+ ' players');
 
 };
-BattleShipGame.prototype.init=function(){
-    for (var i= 0; i<numPlayers;i++){
-        var playername = 'Player'+1;
-        var playertable = new Table(size);
-        var player = new Player(playername,playertable);
-        this.players.push(player);
 
-    };
+BattleShipGame.prototype.init = function(){
+    for(var i=1;i<=this.numPlayers;i++)
+    {
+        var playerName = 'Player '+i;
+        var playerTable = new Table(this.tableSize,this.numPlayers);
+        var play = new Player(playerName, playerTable);
+        this.players.push(play);
+    }
 };
-BattleShipGame.prototype.start=function(){
-    //loop
+
+BattleShipGame.prototype.startGame = function(){
+
     this.printTable();
-    var input = window.prompt('Shot?');//o,1
-    console.log('Shot is ',input);
-    //end loop
+    var row = window.prompt('ROW?');
+    var column = window.prompt('Column?');
+    this.Shot(row,column);
+
 };
-BattleShipGame.prototype.printTable=function(){
-    //loop
-    console.log('Table',this.players[0].table1.grid.join('-'));
-    //end loop
+
+BattleShipGame.prototype.printTable = function(){
+
+    console.log('Table\n' + this.players[0].table.grid.join('\n'));
+
+};
+
+BattleShipGame.prototype.Shot = function(row,column){
+    var r = row-1;
+    var c = column-1;
+    if(this.players[0].table.grid[r][c]!='0' && this.players[0].table.grid[r][c]!='X')
+    {
+        alert('hit!');
+        this.players[0].table.grid[r][c]='X';
+        console.log('Table\n' + this.players[0].table.grid.join('\n'));
+        var row = window.prompt('put a row:');
+        var column = window.prompt('put a colum:');
+        this.Shot(row,column);
+    }
+    else
+    {
+        alert('......');
+    }
 };

@@ -1,53 +1,87 @@
 /**
  * Created by aleidasarzuri on 6/22/2015.
  */
-var Table = function(size){
+ /**
+  *
+*/
+
+var Table = function(size,quantity){
   this.size = size;
   this.ships = [];
+  this.tables = [];
   this.grid = [];
-
+  this.quantity = quantity;
   this.initGrid();
   this.initShips();
 };
 
-Table.prototype.initGrid=function(size){
-  for(var i=0;i<size;i++){
-    var emptycell = '0';
-    this.grid.push(emptycell);
-  };
+Table.prototype.initGrid = function(){
+  var EMPTY_CELL = '0';
+  for(var q=0;q<this.quantity;q++)
+  {
+    for (var i = 0; i < this.size; i++)
+    {
+      this.grid[i]=new Array(this.size);
+    }
+    for (var i = 0; i < this.size; i++)
+    {
+      for (var j = 0; j < this.size; j++)
+      {
+        this.grid[i][j]=EMPTY_CELL;
+      }
+    }
+
+  }
 };
+
 Table.prototype.initShips = function(){
-  //for(..NUM SHIPS){}
-  var shipId = 1; //1== first ship
-  var shipSize = this.getShipRandomSize();
-  var shipInitPos = this.getShipRandomPos(shipSize); //returns new axis (4,5)
-  var Ship = new Ship(shipSize,shipPos);
-  this.ships.push(Ship);
+  for(var t=1;t<=4;t++)
+  {
+    var shipID = t.toString();
+    var shipSize = this.getShipRandomSize();
+    var ShipPos = this.getShipRandomPos(shipSize);
+    var ship = new Ship(shipSize,ShipPos);
 
-  for(var j=shipInitPos.column;j<shipInitPos.column+shipSize;j++) {
-    this.grid[j] = shipId;
-  };
+    this.ships.push(ship);
+
+    var i = ShipPos.getRow();
+    for(var j=ShipPos.getColumn();j<shipSize+ShipPos.getColumn();j++)
+    {
+      this.grid[i][j] = shipID;
+    }
+  }
 };
-Table.prototype.getShipRandomSize = new function()
-{
-  return parseInt((Math.random()*2)+1);
-};
-Table.prototype.getShipRandomPos = function(shipSize)
-{
+
+Table.prototype.getShipRandomPos = function(shipSize){
   var column;
-
-  do {
-    column = parseInt(Math.random()*(this.size-shipSize));
-    var counter = 0;
-    for(var i=column; i<column+shipSize; i++){
-      if(this.grid[i]!='0'){
+  var row;
+  var i;
+  do
+  {
+    column = parseInt(Math.random() * this.size - shipSize);
+    row = parseInt(Math.random() * this.size);
+    for(var j=0;j<row;j++)
+    {
+      for(i = column; i < column + shipSize; i++)
+      {
+        if(this.grid[j][i] != '0')
+        {
+          break;
+        }
+      }
+      if(i == column + shipSize)
+      {
         break;
       }
     }
-    if(i==column+shipSize){
+    if(i == column + shipSize)
+    {
       break;
     }
-  }while(true)
+  }while(true);
+  return new Axis(row,column);
+};
 
-  return new Axis(column,0);
+Table.prototype.getShipRandomSize = function(){
+  return parseInt(Math.random() *3)+1;
 };

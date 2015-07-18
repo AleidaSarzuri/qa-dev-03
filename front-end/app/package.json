@@ -1,0 +1,15 @@
+{
+  "name": "node_samples",
+  "version": "1.0.0",
+  "description": "My samples app",
+  "main": "index.js",
+  "dependencies": {
+    "jasmine-node": "^1.14.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "./node_modules/jasmine-node/bin/jasmine-node --verbose spec"
+  },
+  "author": "Aleida",
+  "license": "ISC"
+}
